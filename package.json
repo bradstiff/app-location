@@ -1,0 +1,44 @@
+{
+  "name": "app-location",
+  "version": "1.0.0",
+  "description": "A package to avoid repetition with Routes, Links and URLs, and reduce boilerplate with location param parsing in SPAs",
+  "main": "./dist/Location.js",
+  "repository": "https://github.com/bradstiff/app-location.git",
+  "scripts": {
+    "test": "jest",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile"
+  },
+  "keywords": [
+    "react",
+    "vue",
+    "location"
+  ],
+  "author": "Brad Stiff",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.1",
+    "jest": "^23.5.0",
+    "regenerator-runtime": "^0.12.1",
+    "yup": "^0.26.3"
+  },
+  "peerDependencies": {
+    "yup": "^0.26.3"
+  },
+  "dependencies": {
+    "path-to-regexp": "^1.7.0",
+    "querystringify": "^2.0.0",
+    "warning": "^4.0.2"
+  },
+  "jest": {
+    "roots": [
+      "tests"
+    ],
+    "testRegex": "\\.js"
+  }
+}

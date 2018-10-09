@@ -30,22 +30,33 @@ To parse the parameters from a URL, call the Location's parseLocationParameters 
 are validated according to the path and query string parameter schemas, cast to the appropriate data types, and returned as a literal object.
 
 ```javascript
-import * as Yup from 'yup';
 import Location from 'app-location';
+import * as Yup from 'yup';
+
+const wholeNbr = Yup.number().integer().positive();
 
 const ArticleListLocation = new Location('/articles', null, {
     isPublished: Yup.boolean().default(true),
     categoryID: wholeNbr.nullable(),
 });
-const ArticleLocation = new Location('/articles/:id', { id: Yup.number().integer().positive().required() });
+const ArticleLocation = new Location.Location('/articles/:id', {
+    id: wholeNbr.required()
+});
 
-//Returns `articles?categoryID=1`
-const url = ArticleListLocation.toUrl(null, {categoryID: 1}); 
+//Returns '/articles?categoryID=1'
+console.log(ArticleListLocation.toUrl(null, { categoryID: 1 }));
 
-//Returns { categoryID: 1, isPublished: true}
+//Returns '/articles/1'
+console.log(ArticleLocation.toUrl({ id: 1 }));
+
+//Assume window.location = { pathname: '/articles', search:'categoryID=1' }
+//Returns { categoryID: 1, isPublished: true }
 //Parameters with defaults are coalesced into the returned object.
-//Will use window.location if a location object is not provided.
-const params = ArticleListLocation.parseLocationParameters({pathname: 'articles', search:'categoryID=1'}))
+console.log(ArticleListLocation.parseLocationParameters({ pathname: '/articles', search: 'categoryID=1' }));
+
+//Assume window.location = { pathname: '/articles/1', search: '' }
+//Returns { id: 1 }
+console.log(ArticleLocation.parseLocationParameters({ pathname: '/articles/1' }));
 ```
 
 ## API
