@@ -6,11 +6,9 @@ Declarative locations for Single Page Apps. Avoids repetition with Routes and Li
 </p>
 
 ## Install
-
 `npm install app-location --save`
 
 ## Usage
-
 A `Location` is an endpoint that your app supports.  It specifies a path, and can optionally specify path and query string parameter schemas. 
 
 A `Location` keeps your code DRY as the `Location` is defined in one place and used throughout your code to generate URLs for Routes and Links,
@@ -21,12 +19,10 @@ The API is router-agnostic and framework-agnostic.
 `app-location` supports two primary use cases:
 
 ### Generate a URL
-
-To generate a URL, call the Location's toUrl function and provide a literal object of values. The values will be mapped to path and query string parameters and inserted into the resulting URL.
+To generate a URL, call the Location's `toUrl` function and provide a literal object of values. The values will be mapped to path and query string parameters and inserted into the resulting URL.
 
 ### Parse parameters from a URL
-
-To parse the parameters from a URL, call the Location's parseLocationParameters function. The parameter values will be parsed from window.location (or a location object you provide). The values
+To parse the parameters from a URL, call the Location's `parseLocationParameters` function. The parameter values will be parsed from window.location (or a location object you provide). The values
 are validated according to the path and query string parameter schemas, cast to the appropriate data types, and returned as a literal object.
 
 ```javascript
@@ -39,28 +35,27 @@ const ArticleListLocation = new Location('/articles', null, {
     isPublished: Yup.boolean().default(true),
     categoryID: wholeNbr.nullable(),
 });
-const ArticleLocation = new Location.Location('/articles/:id', {
+const ArticleLocation = new Location('/articles/:id', {
     id: wholeNbr.required()
 });
 
 //Returns '/articles?categoryID=1'
-console.log(ArticleListLocation.toUrl(null, { categoryID: 1 }));
+console.log(ArticleListLocation.toUrl({ categoryID: 1 }));
 
 //Returns '/articles/1'
 console.log(ArticleLocation.toUrl({ id: 1 }));
 
 //Assume window.location = { pathname: '/articles', search:'categoryID=1' }
-//Returns { categoryID: 1, isPublished: true }
+//Returns Object { categoryID: 1, isPublished: true }
 //Parameters with defaults are coalesced into the returned object.
-console.log(ArticleListLocation.parseLocationParameters({ pathname: '/articles', search: 'categoryID=1' }));
+console.log(ArticleListLocation.parseLocationParams({ pathname: '/articles', search: 'categoryID=1' }));
 
 //Assume window.location = { pathname: '/articles/1', search: '' }
-//Returns { id: 1 }
-console.log(ArticleLocation.parseLocationParameters({ pathname: '/articles/1' }));
+//Returns Object { id: 1 }
+console.log(ArticleLocation.parseLocationParams({ pathname: '/articles/1', search: '' }));
 ```
 
 ## API
-
 **`Location.ctor(path: string, pathParamDefs: ?schema, queryStringParamDefs: ?schema): Location`**
 
 Defines a `Location`. pathParamDefs and queryStringParamDefs are optional and specified as Yup schemas.
@@ -75,4 +70,4 @@ Returns the path property.
 
 **`Location.parseLocationParams(location: object = window.location) : object`**
 
-Returns a literal object containing the parameters parsed from the `location`. Each parameter is validated and cast to the data type indicated in the schema. If validation fails, returns null."# app-location" 
+Returns a literal object containing the parameters parsed from the `location`. Each parameter is validated and cast to the data type indicated in the schema. If validation fails, returns null.
