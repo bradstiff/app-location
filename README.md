@@ -1,5 +1,5 @@
 # app-location
-Declarative locations for Single Page Apps. Avoids repetition with generating URLs, and reduces boilerplate with parsing and casting parameters from URLs.
+Declarative, router-agnostic locations for Single Page Apps. Avoids repetition with generating URLs, and reduces boilerplate with parsing and casting parameters from URLs.
 <p align="center">
   <a href="https://www.npmjs.com/package/app-location"><img src="https://img.shields.io/npm/v/app-location.svg?style=flat-square"></a>
   <a href="https://www.npmjs.com/package/app-location"><img src="https://img.shields.io/npm/dm/app-location.svg?style=flat-square"></a>
