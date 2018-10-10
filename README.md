@@ -47,7 +47,7 @@ console.log(ArticleLocation.toUrl({ id: 1 }));
 
 //Assume window.location = { pathname: '/articles', search:'categoryID=1' }
 //Returns Object { categoryID: 1, isPublished: true }
-//Parameters with defaults are coalesced into the returned object.
+//Default parameter values are coalesced into the returned object.
 console.log(ArticleListLocation.parseLocationParams({ pathname: '/articles', search: 'categoryID=1' }));
 
 //Assume window.location = { pathname: '/articles/1', search: '' }
