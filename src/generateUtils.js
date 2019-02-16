@@ -54,7 +54,7 @@ export function generateQueryString(paramDefs, params = {}) {
     return qs.stringify(queryStringParams);
 }
 
-export function validateParams(paramSchema, params) {
+export function validateParams(paramSchema, params, generateWarning = false) {
     if (!paramSchema) {
         return true;
     }
@@ -63,7 +63,7 @@ export function validateParams(paramSchema, params) {
     } catch (err) {
         const { name, errors } = err;
         if (name === 'ValidationError') {
-            warning(false, `validateParams: ${errors[0]}`);
+            if (generateWarning) warning(false, `validateParams: ${errors[0]}`);
         } else {
             throw err;
         }

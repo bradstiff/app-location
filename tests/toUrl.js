@@ -17,6 +17,10 @@ const ResourceListLocation = new Location('/resources', null, {
 });
 const ResourceLocation = new Location('/resources/:id', { id: wholeNbr.required() }, { date: isNullableDate });
 
+afterEach(() => {
+    jest.clearAllMocks();
+});
+
 test('builds URL with path param', () => {
     const serializedUrl = ResourceLocation.toUrl({ id: 1 }); //should be id:1
     expect(serializedUrl).toBe('/resources/1');
@@ -70,6 +74,8 @@ test('validate params returns true', () => {
 })
 
 test('validate params returns false', () => {
+    jest.spyOn(global.console, "error").mockImplementation(() => { })
     const isValid = ResourceListLocation.isValidParams({ categoryID: 1 }); //should be typeID:1
     expect(isValid).toBeFalsy();
+    expect(console.error).toBeCalledTimes(0);
 })

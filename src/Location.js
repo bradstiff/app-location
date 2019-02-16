@@ -32,7 +32,7 @@ export default class Location {
             return this.path;
         }
 
-        if (!validateParams(this._paramSchema, params)) {
+        if (!validateParams(this._paramSchema, params, true)) {
             //params don't satisfy schema
             return null;
         }
@@ -71,6 +71,6 @@ export default class Location {
     }
 
     isValidParams(params) {
-        return validateParams(this._paramSchema, params);
+        return validateParams(this._paramSchema, params, false);
     }
 }

@@ -17,6 +17,10 @@ const ResourceListLocation = new Location('/resources', null, {
 });
 const ResourceLocation = new Location('/resources/:id', { id: wholeNbr.required() }, { date: isNullableDate });
 
+afterEach(() => {
+    jest.clearAllMocks();
+});
+
 test('parses URL with path param', () => {
     const location = {
         pathname: '/resources/1',
