@@ -69,4 +69,8 @@ export default class Location {
             return null;
         }
     }
+
+    isValidParams(params) {
+        return validateParams(this._paramSchema, params);
+    }
 }

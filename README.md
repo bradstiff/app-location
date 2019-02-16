@@ -71,3 +71,7 @@ Returns the path property.
 **`Location.parseLocationParams(location: object = window.location) : object`**
 
 Returns a literal object containing the parameters parsed from the `location`. Each parameter is validated and cast to the data type indicated in the schema. If validation fails, returns null.
+
+**`Location.isValidParams(params: ?object): boolean`**
+
+Returns a boolean indicating if the parameters are valid.

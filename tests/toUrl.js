@@ -56,3 +56,20 @@ test('builds URL with no params', () => {
     const serializedUrl = LocationWithoutParams.toUrl();
     expect(serializedUrl).toBe('/');
 })
+
+test('validate params returns true', () => {
+    const locationParams = {
+        typeID: 2,
+        page: 1,
+        rowsPerPage: 50,
+        order: 'desc',
+        isActive: true,
+    };
+    const isValid = ResourceListLocation.isValidParams(locationParams);
+    expect(isValid).toBeTruthy();
+})
+
+test('validate params returns false', () => {
+    const isValid = ResourceListLocation.isValidParams({ categoryID: 1 }); //should be typeID:1
+    expect(isValid).toBeFalsy();
+})
